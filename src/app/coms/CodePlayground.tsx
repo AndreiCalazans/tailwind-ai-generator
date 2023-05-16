@@ -1,17 +1,7 @@
 "use client";
 import { Sandpack } from "@codesandbox/sandpack-react";
 
-export default function CodePlayground() {
-  return (
-    <Sandpack
-      template="react"
-      options={{
-        externalResources: ["https://cdn.tailwindcss.com"],
-        editorHeight: 600,
-        wrapContent: true,
-      }}
-      files={{
-        "/App.js": `export default function Example() {
+const defaultCode = `export default function Example() {
   return (
     <div className="bg-gray-50">
       <div className="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
@@ -40,7 +30,19 @@ export default function CodePlayground() {
       </div>
     </div>
   )
-}`,
+}`;
+
+export default function CodePlayground({ code = defaultCode }: { code?: string }) {
+  return (
+    <Sandpack
+      template="react"
+      options={{
+        externalResources: ["https://cdn.tailwindcss.com"],
+        editorHeight: 600,
+        wrapContent: true,
+      }}
+      files={{
+        "/App.js": code,
       }}
     />
   );
