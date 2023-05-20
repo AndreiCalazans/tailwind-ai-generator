@@ -20,10 +20,12 @@ export default async function Tailwind({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div>
-      <p>{data.title}</p>
-      <p>{data.prompt}</p>
-      <CodePlayground code={data.snippet.toString()} />;
+    <div className="flex min-h-screen flex-col justify-evenly p-6 sm:px-12 xl:px-24">
+      <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <span className="block">{data.title}</span>
+        <span className="block text-xl text-indigo-600">Prompt: {data.prompt}</span>
+      </h2>
+      <CodePlayground code={data.snippet.toString()} />
     </div>
   );
 }
