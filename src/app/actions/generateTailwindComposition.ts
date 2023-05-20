@@ -17,6 +17,7 @@ Create a component using TailwindCSS and React with the following description: "
 rules to follow:
   - Make it nicely styled.
   - Make it responsive.
+  - Examples are self contained and don't require outside props.
   - Always add minimum amount of padding.
   - If icons are requested return valid SVGs.
   - Don't include any library, use strictly only TailwindCSS and React.

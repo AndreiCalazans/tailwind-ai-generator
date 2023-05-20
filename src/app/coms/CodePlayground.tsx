@@ -32,15 +32,23 @@ const defaultCode = `export default function Example() {
   )
 }`;
 
-export default function CodePlayground({ code = defaultCode }: { code?: string }) {
+export default function CodePlayground({
+  code = defaultCode,
+  options,
+}: {
+  code?: string;
+  options?: React.ComponentProps<typeof Sandpack>["options"];
+}) {
   return (
     <Sandpack
       template="react"
-      options={{
-        externalResources: ["https://cdn.tailwindcss.com"],
-        editorHeight: 600,
-        wrapContent: true,
-      }}
+      options={
+        options ?? {
+          externalResources: ["https://cdn.tailwindcss.com"],
+          editorHeight: 600,
+          wrapContent: true,
+        }
+      }
       files={{
         "/App.js": code,
       }}
