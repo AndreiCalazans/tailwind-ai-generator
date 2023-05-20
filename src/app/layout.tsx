@@ -1,3 +1,4 @@
+import { SandPackCSS } from './coms/sandpack-styles'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -15,6 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+       <head>
+        <SandPackCSS />
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   )
