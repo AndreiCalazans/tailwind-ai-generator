@@ -34,7 +34,7 @@ return (
 export default async function Gallery() {
   const snippets = await prisma.snippet.findMany();
   return (
-    <main className="flex min-h-screen flex-col justify-evenly p-6 sm:px-12 xl:px-24">
+    <main className="flex flex-col justify-evenly gap-6">
       <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
         <span className="block">Tailwind Component Gallery</span>
         <span className="block text-2xl text-indigo-600">
