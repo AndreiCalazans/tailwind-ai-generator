@@ -1,12 +1,18 @@
-const Header = ({ children } ) => 
-        <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{children}</h1>
+const Header = ({ children }: { children: React.ReactNode }) => (
+  <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+    {children}
+  </h1>
+);
 
-const Text = ({ children } ) => 
-        <p className="relative mt-6 text-lg leading-8 text-gray-600 sm:max-w-md lg:max-w-none">{children}</p>
+const Text = ({ children }: { children: React.ReactNode }) => (
+  <p className="relative mt-6 text-lg leading-8 text-gray-600 sm:max-w-md lg:max-w-none">
+    {children}
+  </p>
+);
 
 const About = () => {
   return (
- <div className="flex w-full gap-20 flex-col">
+    <div className="flex w-full gap-20 flex-col">
       <div className="">
         <Text>
           I am a developer who is passionate about using large language models
@@ -62,7 +68,8 @@ const About = () => {
           <a href="mailto:andreixoc@gmail.com">andreixoc@gmail.com</a>.
         </Text>
       </div>
-    </div>  );
+    </div>
+  );
 };
 
 export default async function AboutUs() {
