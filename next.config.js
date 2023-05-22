@@ -1,3 +1,5 @@
+import { withAxiom } from 'next-axiom';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
@@ -5,4 +7,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default withAxiom(nextConfig);

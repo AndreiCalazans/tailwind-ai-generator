@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import { NavBar } from './coms/NavBar';
 import Footer from "./coms/Footer";
 
+export { reportWebVitals } from 'next-axiom';
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
