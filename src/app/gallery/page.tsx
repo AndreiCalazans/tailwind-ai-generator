@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { PrismaClient } from "@prisma/client";
 
-import CodePlayground from "../coms/CodePlayground";
 import SandpackPreviewPane from "../coms/SandpackPreviewPane";
 
 const prisma = new PrismaClient();
