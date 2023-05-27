@@ -3,6 +3,9 @@ import { PrismaClient } from "@prisma/client";
 
 import SandpackPreviewPane from "../coms/SandpackPreviewPane";
 
+// revalidate every 30 seconds
+export const revalidate = 30;
+
 const prisma = new PrismaClient();
 
 const SnippetCard = ({
