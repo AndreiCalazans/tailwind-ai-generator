@@ -1,5 +1,10 @@
 "use server";
-import { Configuration, OpenAIApi, CreateCompletionResponse } from "openai";
+import {
+  Configuration,
+  OpenAIApi,
+  CreateCompletionResponse,
+  CreateEditResponse,
+} from "openai";
 import { PrismaClient } from "@prisma/client";
 import { redirect } from "next/navigation";
 
@@ -31,17 +36,40 @@ function makePromptForTitle(description: string) {
 Summarize into a title the UI element that was created, don't include libraries mentioned.`;
 }
 
-async function getCompletion(
-  description: string
+const codeInput = `
+export default function Example() {
+  return (
+    <div className="bg-gray-50">
+    </div>
+  )
+}`;
+
+async function getTextCompletion(
+  prompt: string
 ): Promise<CreateCompletionResponse> {
   const request = {
-    prompt: description,
+    prompt: prompt,
     temperature: 0.7,
     top_p: 0.9,
     max_tokens: 2200,
     model: "text-davinci-003",
   };
   const response = await openai.createCompletion(request);
+  return response.data;
+}
+
+async function getCodeDavinciCompletion(
+  prompt: string
+): Promise<CreateEditResponse> {
+  const request = {
+    temperature: 0.7,
+    top_p: 0.9,
+    n: 1,
+    model: "code-davinci-edit-001",
+    instruction: prompt,
+    input: codeInput,
+  };
+  const response = await openai.createEdit(request);
   return response.data;
 }
 
@@ -56,8 +84,8 @@ export async function generateTailwindComponent(data: FormData) {
   try {
     console.log("Initializing Tailwind Generation", description);
     const [title, snippet] = await Promise.all([
-      getCompletion(makePromptForTitle(description)),
-      getCompletion(makePromptForDescription(description)),
+      getTextCompletion(makePromptForTitle(description)),
+      getCodeDavinciCompletion(makePromptForDescription(description)),
     ]);
     console.log("Success!");
 
@@ -67,7 +95,7 @@ export async function generateTailwindComponent(data: FormData) {
     }
 
     const generatedSnippet = snippet.choices[0].text;
-    console.log("Generated Snippet", title.choices);
+    console.log("Generated title", title.choices);
 
     // Sometimes we get a title with some new lines which we want to remove.
     const snippetTitle = (title.choices[0].text ?? "Unitled Snippet").replace(
